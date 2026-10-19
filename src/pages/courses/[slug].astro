@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import MaterialCard from '../../components/MaterialCard.astro';
+import { url } from '../../lib/site';
+import { courses, materialsForCourse, TYPE_LABELS } from '../../lib/catalog';
+
+export function getStaticPaths() {
+  return courses.map((course) => ({ params: { slug: course.slug }, props: { course } }));
+}
+
+const { course } = Astro.props;
+const items = materialsForCourse(course.slug);
+const types = [...new Set(items.map((item) => item.type))];
+---
+
+<Base title={`${course.code}: ${course.title}`} description={`Study materials for ${course.code}, ${course.title}.`}>
+  <p class="meta"><a href={url('/courses/')}>All courses</a> / {course.department}</p>
+  <h1>{course.code}: {course.title}</h1>
+  <p><a href={url(`/search/?course=${course.slug}`)}>Search within this course</a></p>
+  {items.length === 0 && <p>No materials yet. <a href={url('/submit/')}>Be the first to share one.</a></p>}
+  {types.map((type) => (
+    <section>
+      <h2>{TYPE_LABELS[type] ?? type}</h2>
+      <ul class="grid">
+        {items.filter((item) => item.type === type).map((item) => <MaterialCard material={item} />)}
+      </ul>
+    </section>
+  ))}
+</Base>

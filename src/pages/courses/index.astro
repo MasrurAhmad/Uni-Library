@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { courses } from '../../lib/catalog';
+---
+
+<Base title="Courses" description="All courses in the library.">
+  <h1>Courses</h1>
+  <ul class="grid">
+    {courses.map((course) => <CourseCard course={course} />)}
+  </ul>
+</Base>

@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/site';
+import { courses, materials, TYPE_LABELS } from '../lib/catalog';
+
+// Only offer filter choices that exist in the catalog. Newest semester first.
+const SEASON_ORDER: Record<string, number> = { Winter: 0, Spring: 1, Summer: 2, Fall: 3 };
+const semesters = [...new Set(materials.map((m) => m.semester))].sort((a, b) => {
+  const [seasonA, yearA] = a.split(' ');
+  const [seasonB, yearB] = b.split(' ');
+  return Number(yearB) - Number(yearA) || SEASON_ORDER[seasonB] - SEASON_ORDER[seasonA];
+});
+const types = Object.keys(TYPE_LABELS).filter((type) => materials.some((m) => m.type === type));
+---
+
+<Base title="Search" description="Search the library by title, course, type or semester.">
+  <h1>Search</h1>
+  <form
+    id="search-form"
+    class="search-form"
+    role="search"
+    method="get"
+    action={url('/search/')}
+    data-index-url={url('/search-index.json')}
+    data-material-base={url('/materials/')}
+    data-submit-url={url('/submit/')}
+    data-courses-url={url('/courses/')}
+  >
+    <div class="field field-wide">
+      <label for="q">Search the library</label>
+      <input id="q" name="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="Try: recursion, CSE101, past paper" />
+    </div>
+    <div class="field">
+      <label for="course">Course</label>
+      <select id="course" name="course">
+        <option value="">All courses</option>
+        {courses.map((course) => <option value={course.slug}>{course.code}: {course.title}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="type">Type</label>
+      <select id="type" name="type">
+        <option value="">All types</option>
+        {types.map((type) => <option value={type}>{TYPE_LABELS[type]}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for="semester">Semester</label>
+      <select id="semester" name="semester">
+        <option value="">All semesters</option>
+        {semesters.map((semester) => <option value={semester}>{semester}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <button class="button" type="submit">Search</button>
+    </div>
+  </form>
+
+  <p id="search-status" class="meta" role="status"></p>
+  <ul id="search-results" class="grid"></ul>
+  <p><button id="search-more" class="button secondary" type="button" hidden>Show more</button></p>
+  <noscript><p>Search needs JavaScript. You can still <a href={url('/courses/')}>browse the courses</a>.</p></noscript>
+
+  <script>
+    import '../scripts/search-entry.js';
+  </script>
+</Base>

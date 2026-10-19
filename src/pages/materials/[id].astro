@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { url, issueUrl } from '../../lib/site';
+import { materials, courseBySlug, TYPE_LABELS, LICENSE_LABELS } from '../../lib/catalog';
+
+export function getStaticPaths() {
+  return materials.map((material) => ({ params: { id: material.id }, props: { material } }));
+}
+
+const { material } = Astro.props;
+const course = courseBySlug(material.course);
+const typeLabel = TYPE_LABELS[material.type] ?? material.type;
+const reportHref = issueUrl('report-problem.yml', `Report: ${material.id}`);
+---
+
+<Base title={material.title} description={material.description ?? `${typeLabel} for ${course?.code ?? 'a course'}.`}>
+  {course && <p class="meta"><a href={url(`/courses/${course.slug}/`)}>{course.code}: {course.title}</a></p>}
+  <h1>{material.title}</h1>
+  {material.description && <p class="lead">{material.description}</p>}
+  <dl class="facts">
+    <dt>Type</dt><dd>{typeLabel}</dd>
+    <dt>Semester</dt><dd>{material.semester}</dd>
+    <dt>Why it can be shared</dt><dd>{LICENSE_LABELS[material.license] ?? material.license}</dd>
+    {material.contributor && <><dt>Shared by</dt><dd>{material.contributor}</dd></>}
+    <dt>Added</dt><dd>{material.addedOn}</dd>
+  </dl>
+  <p><a class="button" href={material.url} target="_blank" rel="noopener noreferrer nofollow">Open material</a></p>
+  <p class="meta">
+    This opens another website.
+    {reportHref ? <a href={reportHref}>Report a problem with this entry</a> : <a href={url('/policy/')}>How to report a problem</a>}
+  </p>
+</Base>

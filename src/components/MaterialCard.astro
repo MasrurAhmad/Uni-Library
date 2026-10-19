@@ -1,0 +1,16 @@
+---
+import { url } from '../lib/site';
+import { TYPE_LABELS, courseBySlug, type Material } from '../lib/catalog';
+
+interface Props { material: Material; showCourse?: boolean }
+const { material, showCourse = false } = Astro.props;
+const course = courseBySlug(material.course);
+---
+
+<li class="card">
+  <h3><a href={url(`/materials/${material.id}/`)}>{material.title}</a></h3>
+  <p class="meta">
+    <span class="tag">{TYPE_LABELS[material.type] ?? material.type}</span>
+    {showCourse && course ? ` ${course.code} · ` : ' '}{material.semester}
+  </p>
+</li>

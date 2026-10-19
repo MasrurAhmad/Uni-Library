@@ -1,0 +1,12 @@
+---
+import { url } from '../lib/site';
+import { materialsForCourse, plural, type Course } from '../lib/catalog';
+
+interface Props { course: Course }
+const { course } = Astro.props;
+---
+
+<li class="card">
+  <h3><a href={url(`/courses/${course.slug}/`)}>{course.code}: {course.title}</a></h3>
+  <p class="meta">{course.department} · {plural(materialsForCourse(course.slug).length, 'material')}</p>
+</li>

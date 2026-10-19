@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import { SITE_NAME, TAGLINE, REPO_URL, url } from '../lib/site';
+import { hasSampleData } from '../lib/catalog';
+
+interface Props {
+  title?: string;
+  description?: string;
+  // Markdown pages (like policy.md) pass their front matter in here.
+  frontmatter?: { title?: string; description?: string };
+}
+
+const { title, description, frontmatter } = Astro.props;
+const pageTitle = title ?? frontmatter?.title;
+const fullTitle = pageTitle ? `${pageTitle} · ${SITE_NAME}` : SITE_NAME;
+const metaDescription = description ?? frontmatter?.description ?? TAGLINE;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="text-scale" content="scale" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {hasSampleData && <p class="banner" role="note">Sample entries only. Nothing here is real study material yet.</p>}
+    <header class="site-header">
+      <a class="brand" href={url('/')}>{SITE_NAME}</a>
+      <nav aria-label="Main">
+        <a href={url('/search/')}>Search</a>
+        <a href={url('/courses/')}>Courses</a>
+        <a href={url('/submit/')}>Share a material</a>
+        <a href={url('/policy/')}>Content policy</a>
+      </nav>
+    </header>
+    <main id="main" class="page">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        Every entry links to a file shared by its owner. Something wrong?
+        <a href={url('/policy/')}>See the takedown process</a>{REPO_URL && <>, or <a href={`${REPO_URL}/issues/new?template=report-problem.yml`}>report a problem</a></>}.
+      </p>
+    </footer>
+  </body>
+</html>
