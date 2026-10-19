@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { url, issueUrl } from '../lib/site';
+
+const formHref = issueUrl('submit-material.yml');
+---
+
+<Base title="Share a material" description="How to share a study material with the library.">
+  <h1>Share a material</h1>
+  <p class=”lead”>It takes about two minutes. Your submission will appear instantly.</p>
+  <ol class=”steps”>
+    <li><strong>Put the file somewhere it opens without logging in.</strong> For example, a Google Drive or OneDrive file set to “anyone with the link can view”.</li>
+    <li>
+      <strong>Send the details.</strong>
+      {formHref
+        ? <a class="button" href={formHref}>Open the submission form</a>
+        : <span>The form link appears here once the site is connected to its GitHub repository.</span>}
+    </li>
+    <li><strong>Check the library.</strong> Your material will appear on the site within a few minutes.</li>
+  </ol>
+  <p class="meta">The form needs a free GitHub account. A way to submit without one is planned.</p>
+</Base>

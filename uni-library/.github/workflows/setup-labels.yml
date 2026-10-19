@@ -1,0 +1,19 @@
+name: Create labels
+
+# Run this once: Actions tab, "Create labels", Run workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - run: |
+          gh label create submission --description "A material someone wants to share" --color 1f4fbf --force
+          gh label create report --description "A problem report" --color d93f0b --force

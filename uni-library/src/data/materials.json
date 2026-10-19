@@ -1,0 +1,52 @@
+[
+  {
+    "id": "sample-cse101-recursion-notes",
+    "title": "Sample: Recursion notes",
+    "course": "cse101",
+    "type": "notes",
+    "semester": "Fall 2026",
+    "url": "https://example.com/sample/recursion-notes",
+    "description": "Placeholder entry that shows how a set of notes appears. Replace it with real, permitted material.",
+    "contributor": "Sample",
+    "license": "own-work",
+    "addedOn": "2026-10-16",
+    "sample": true
+  },
+  {
+    "id": "sample-cse101-lab-1",
+    "title": "Sample: Lab 1 write-up",
+    "course": "cse101",
+    "type": "lab",
+    "semester": "Fall 2026",
+    "url": "https://example.com/sample/lab-1",
+    "description": "Placeholder entry for a lab write-up.",
+    "contributor": "Sample",
+    "license": "own-work",
+    "addedOn": "2026-10-15",
+    "sample": true
+  },
+  {
+    "id": "sample-mat101-limits-slides",
+    "title": "Sample: Limits lecture slides",
+    "course": "mat101",
+    "type": "slides",
+    "semester": "Fall 2026",
+    "url": "https://example.com/sample/limits-slides",
+    "description": "Placeholder entry for lecture slides shared with the instructor's permission.",
+    "license": "instructor-permitted",
+    "addedOn": "2026-10-14",
+    "sample": true
+  },
+  {
+    "id": "sample-phy101-practice-questions",
+    "title": "Sample: Mid-term practice questions",
+    "course": "phy101",
+    "type": "past-paper",
+    "semester": "Spring 2026",
+    "url": "https://example.com/sample/practice-questions",
+    "description": "Placeholder entry for a past paper that the university permits sharing.",
+    "license": "university-permitted",
+    "addedOn": "2026-10-13",
+    "sample": true
+  }
+]

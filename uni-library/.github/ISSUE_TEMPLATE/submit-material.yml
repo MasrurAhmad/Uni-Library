@@ -1,0 +1,81 @@
+name: Submit a material
+description: Suggest a study material for the library.
+title: "Submission: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing. Your submission will appear on the site within a few minutes.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: Week 3 lecture notes on recursion
+    validations:
+      required: true
+  - type: input
+    id: course
+    attributes:
+      label: Course code
+      placeholder: CSE101
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - Notes
+        - Slides
+        - Lab
+        - Past paper
+        - Assignment
+        - Book or open textbook
+        - Project
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: semester
+    attributes:
+      label: Semester
+      placeholder: Fall 2026
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link to the file
+      description: It must open without logging in.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: license
+    attributes:
+      label: Why may this be shared?
+      options:
+        - It is my own work
+        - The instructor allows sharing it
+        - It has an open license, such as Creative Commons
+        - The university permits sharing it
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Short description
+      description: One or two sentences. Optional.
+  - type: input
+    id: credit
+    attributes:
+      label: Name to show (optional)
+      description: Leave this empty to stay anonymous.
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Confirmation
+      options:
+        - label: I confirm this information is accurate.
+          required: true

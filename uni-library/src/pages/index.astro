@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import CourseCard from '../components/CourseCard.astro';
+import MaterialCard from '../components/MaterialCard.astro';
+import { url, TAGLINE } from '../lib/site';
+import { courses, materials } from '../lib/catalog';
+
+const recent = materials.slice(0, 6);
+---
+
+<Base>
+  <h1>Find and share university study materials</h1>
+  <p class="lead">{TAGLINE} Every entry links to a file shared by its owner, and every submission is reviewed before it appears.</p>
+  <form class="hero-search" role="search" method="get" action={url('/search/')}>
+    <label class="visually-hidden" for="home-q">Search the library</label>
+    <input id="home-q" name="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="Search by title, course or topic" />
+    <button class="button" type="submit">Search</button>
+  </form>
+  <p>
+    <a class="button secondary" href={url('/courses/')}>Browse courses</a>
+    <a href={url('/submit/')}>Share a material</a>
+  </p>
+
+  <h2>Courses</h2>
+  <ul class="grid">
+    {courses.map((course) => <CourseCard course={course} />)}
+  </ul>
+
+  <h2>Recently added</h2>
+  <ul class="grid">
+    {recent.map((material) => <MaterialCard material={material} showCourse />)}
+  </ul>
+</Base>

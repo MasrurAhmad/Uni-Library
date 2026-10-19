@@ -1,0 +1,34 @@
+name: Report a problem
+description: Report a dead link, a mistake, or something that should be removed.
+title: "Report: "
+labels: ["report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Copyright or permission problems are handled first. We remove first and discuss afterwards.
+  - type: input
+    id: entry
+    attributes:
+      label: Which entry or page?
+      description: Paste the address of the page.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - The link is dead
+        - The information is wrong
+        - It should be removed (copyright or permission)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Tell us what we need to know.
+    validations:
+      required: true

@@ -1,0 +1,5 @@
+[
+  { "slug": "cse101", "code": "CSE101", "title": "Introduction to Programming", "department": "Computer Science", "sample": true },
+  { "slug": "mat101", "code": "MAT101", "title": "Calculus I", "department": "Mathematics", "sample": true },
+  { "slug": "phy101", "code": "PHY101", "title": "Physics I", "department": "Physics", "sample": true }
+]
