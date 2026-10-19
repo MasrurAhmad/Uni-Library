@@ -29,9 +29,11 @@ const metaDescription = description ?? frontmatter?.description ?? TAGLINE;
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    {hasSampleData && <p class="banner" role="note">Sample entries only. Nothing here is real study material yet.</p>}
     <header class="site-header">
-      <a class="brand" href={url('/')}>{SITE_NAME}</a>
+      <a class="brand" href={url('/')}>
+        <img src={url('/simt-logo.png')} alt="SIMT Engineering College" class="logo" />
+        <span>{SITE_NAME}</span>
+      </a>
       <nav aria-label="Main">
         <a href={url('/search/')}>Search</a>
         <a href={url('/courses/')}>Courses</a>

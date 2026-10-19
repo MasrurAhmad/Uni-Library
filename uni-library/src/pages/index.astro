@@ -10,7 +10,7 @@ const recent = materials.slice(0, 6);
 
 <Base>
   <h1>Find and share university study materials</h1>
-  <p class="lead">{TAGLINE} Every entry links to a file shared by its owner, and every submission is reviewed before it appears.</p>
+  <p class="lead">{TAGLINE} Every entry links to a file shared by its owner, and submissions appear automatically.</p>
   <form class="hero-search" role="search" method="get" action={url('/search/')}>
     <label class="visually-hidden" for="home-q">Search the library</label>
     <input id="home-q" name="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="Search by title, course or topic" />
